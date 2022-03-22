@@ -15,6 +15,8 @@ class ProduitController extends Controller
     public function index()
     {
         //
+        $produits = Produit::get();
+        return view('dashboard', compact('produits'));
     }
 
     /**
@@ -36,6 +38,29 @@ class ProduitController extends Controller
     public function store(Request $request)
     {
         //
+        $produit = $this->validate($request, [
+            'name' => 'required|string',
+            'prix' => 'required',
+            'description' => 'required',
+            'photo' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048',
+        ]);
+
+        if ($request->hasFile('photo')) {
+
+            $name = $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->store('public/img');
+
+            $produit = new Produit();
+            $produit->name = $request->name;
+            $produit->price = $request->price;
+            $produit->description = $request->description;
+            $produit->photo = $path;
+        }
+        
+
+        return redirect('/home')->with('message', "Produit ajouté avec succès");
+
+        
     }
 
     /**
@@ -47,6 +72,7 @@ class ProduitController extends Controller
     public function show(Produit $produit)
     {
         //
+        // return view('dashboard', compact('produit'));
     }
 
     /**
@@ -57,7 +83,8 @@ class ProduitController extends Controller
      */
     public function edit(Produit $produit)
     {
-        //
+   
+        // return view('dashboard', compact('produit'));
     }
 
     /**
