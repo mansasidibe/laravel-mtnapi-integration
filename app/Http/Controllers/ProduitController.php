@@ -21,6 +21,11 @@ class ProduitController extends Controller
 
     public function checkout()
     {
+        return view('checkout');
+    }
+
+    public function doCheck()
+    {
         # code...
     }
 
