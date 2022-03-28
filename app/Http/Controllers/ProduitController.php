@@ -19,6 +19,11 @@ class ProduitController extends Controller
         return view('dashboard', compact('produits'));
     }
 
+    public function checkout()
+    {
+        # code...
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -46,6 +51,7 @@ class ProduitController extends Controller
             'photo' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048',
         ]);
 
+        // VERIFIONS S'IL A AJOUTE UNE PHOTO
         if ($request->hasFile('photo')) {
 
             $name = $request->file('photo')->getClientOriginalName();
