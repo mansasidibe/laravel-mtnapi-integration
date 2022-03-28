@@ -27,6 +27,7 @@ class ProduitController extends Controller
     public function create()
     {
         //
+        return view('products.create');
     }
 
     /**
@@ -37,7 +38,7 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // VALIDATION
         $produit = $this->validate($request, [
             'name' => 'required|string',
             'prix' => 'required',
@@ -56,11 +57,8 @@ class ProduitController extends Controller
             $produit->description = $request->description;
             $produit->photo = $path;
         }
-        
-
+        // FAISONS LA REDIRECTION MAINTENANT
         return redirect('/home')->with('message', "Produit ajouté avec succès");
-
-        
     }
 
     /**
@@ -83,7 +81,7 @@ class ProduitController extends Controller
      */
     public function edit(Produit $produit)
     {
-   
+
         // return view('dashboard', compact('produit'));
     }
 
